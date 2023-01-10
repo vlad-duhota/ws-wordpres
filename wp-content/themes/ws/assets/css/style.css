@@ -154,14 +154,14 @@ body {
 
 @media (min-width: 1099px) {
   .section-p .container {
-    padding-left: 110px !important;
-    padding-right: 110px !important;
+    padding-left: 83px !important;
+    padding-right: 83px !important;
   }
 }
 @media (min-width: 1500px) {
   .section-p .container {
-    padding-left: 83px !important;
-    padding-right: 83px !important;
+    padding-left: 110px !important;
+    padding-right: 110px !important;
   }
 }
 
@@ -284,6 +284,9 @@ section.bg {
 .header.light {
   background: #82ADE3;
 }
+.header.light .header__menu-item_search img {
+  filter: invert(100%) grayscale(100%) brightness(100);
+}
 .header .container {
   position: relative;
 }
@@ -300,6 +303,34 @@ section.bg {
 .header__logo img {
   height: 100%;
   width: auto;
+}
+.header .menu-item-has-children {
+  padding-left: 20px;
+  position: relative;
+}
+.header .menu-item-has-children::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5px;
+  width: 6px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+}
+.header .menu-item-has-children:hover .sub-menu {
+  visibility: visible;
+  opacity: 1;
+}
+.header .menu-item-has-children a::after {
+  display: none !important;
+}
+.header__right-wrap {
+  display: flex;
+  align-items: center;
+  gap: 62px;
 }
 .header__menu {
   min-height: 80px;
@@ -334,7 +365,7 @@ section.bg {
   outline: none;
   color: #fff;
   padding-right: 27px;
-  padding-bottom: 11px;
+  padding-bottom: 12px;
 }
 .header__menu-item_search {
   padding-top: 2px;
@@ -344,57 +375,35 @@ section.bg {
   position: relative;
   z-index: 4;
 }
-.header__menu-item_multiple {
-  padding-left: 20px;
-  position: relative;
-}
-.header__menu-item_multiple::before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 5px;
-  width: 6px;
-  height: 6px;
-  background: #000;
-  border-radius: 50%;
-}
-.header__menu-item_multiple:hover .header__menu-subs {
-  visibility: visible;
-  opacity: 1;
-}
-.header__menu-item_multiple .header__menu-link::after {
-  display: none;
-}
-.header__menu-subs {
+.header__menu .sub-menu {
   position: absolute;
   top: 100%;
-  left: -13.5px;
+  left: -14.5px;
   visibility: hidden;
   opacity: 0;
-  padding: 43px 34px 16px;
+  padding: 43px 20px 16px 34px;
   transition: opacity 0.3s;
   background: #fff;
+  width: calc(100% + 43px);
 }
-.header__menu-sub {
+.header__menu .sub-menu li {
   text-transform: capitalize;
   position: relative;
 }
 @media (min-width: 1099px) {
-  .header__menu-sub {
+  .header__menu .sub-menu li {
     font-size: 14px;
   }
 }
 @media (min-width: 1500px) {
-  .header__menu-sub {
+  .header__menu .sub-menu li {
     font-size: 18px;
   }
 }
-.header__menu-sub:not(:last-child) {
+.header__menu .sub-menu li:not(:last-child) {
   margin-bottom: 12px;
 }
-.header__menu-sub::before {
+.header__menu .sub-menu li::before {
   content: "";
   display: block;
   position: absolute;
@@ -408,29 +417,29 @@ section.bg {
   border-radius: 50%;
   transition: opacity 0.3s;
 }
-.header__menu-sub:hover::before {
+.header__menu .sub-menu li:hover::before {
   opacity: 1;
 }
-.header__menu-sub a::after {
+.header__menu .sub-menu li a::after {
   display: none;
 }
-.header__menu-link {
+.header__menu .menu-item a {
   color: #060D37;
   position: relative;
   font-weight: 400;
   display: block;
 }
 @media (min-width: 1099px) {
-  .header__menu-link {
+  .header__menu .menu-item a {
     font-size: 14px;
   }
 }
 @media (min-width: 1500px) {
-  .header__menu-link {
+  .header__menu .menu-item a {
     font-size: 18px;
   }
 }
-.header__menu-link::after {
+.header__menu .menu-item a::after {
   content: "";
   display: block;
   position: absolute;
@@ -442,20 +451,20 @@ section.bg {
   background: #000;
   transition: opacity 0.3s, bottom 0.4s;
 }
-.header__menu-link:hover::after {
+.header__menu .menu-item a:hover::after {
   bottom: -7px;
   opacity: 1;
 }
-.header.light .header__menu-link {
+.header.light .menu-item a {
   color: #fff;
 }
-.header.light .header__menu-link::after {
+.header.light .menu-item a::after {
   background: #fff;
 }
-.header.light .header__menu-subs {
+.header.light .header__menu-list .sub-menu {
   background: #82ADE3;
 }
-.header.light .header__menu-item_multiple::before {
+.header.light .menu-item-has-children::before {
   background: #fff;
 }
 
@@ -658,4 +667,4 @@ section.bg {
   border-radius: 20px;
   border: 3px solid transparent;
   background-clip: content-box;
-}/*# sourceMappingURL=style.css.map */
+}

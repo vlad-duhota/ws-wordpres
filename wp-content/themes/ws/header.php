@@ -12,6 +12,7 @@
     <?php the_field('ah_google_body', 'option'); ?>
 
     <?php wp_body_open() ?>
+    <div class="wrapper">
         <?php if(is_front_page()) :?>
             <header class="header light">
         <?php endif;?>
@@ -86,7 +87,14 @@
         </div> -->
         <div class="container">
         <nav class="header__menu">
-            <ul class="header__menu-list">
+            <?php
+                wp_nav_menu( [
+                'theme_location'  => 'HeadMenuLeft',
+                'container'       => null,
+                'menu_class'      => 'header__menu-list',
+                ] );
+            ?>
+            <!-- <ul class="header__menu-list">
                 <li class="header__menu-item header__menu-item_multiple">
                     <a href="#" class="header__menu-link">Real Estate</a>
                     <ul class="header__menu-subs">
@@ -107,18 +115,10 @@
                 <li class="header__menu-item">
                     <a href="#" class="header__menu-link">Credit</a>
                 </li>
-            </ul>
-            <?php  $logo_id = get_theme_mod( 'custom_logo' );?>
+            </ul> -->
+            <?php  $logo_id = get_field('logo_light', 'options');?>
             <?php  $custom_logo_id = get_theme_mod( 'custom_logo' );?>
             <?php if(!is_front_page()) :?>
-                <a href="<?php echo get_home_url(); ?>" class="header__logo"><?php
-                    if( !empty( $logo_id ) ) {
-                        echo wp_get_attachment_image( $logo_id, 'full' );
-                    } else {
-                        bloginfo('name');
-                    } ?>
-            <?php endif;?>
-            <?php if(is_front_page()) :?>
                 <a href="<?php echo get_home_url(); ?>" class="header__logo"><?php
                     if( !empty( $custom_logo_id ) ) {
                         echo wp_get_attachment_image( $custom_logo_id, 'full' );
@@ -126,17 +126,43 @@
                         bloginfo('name');
                     } ?>
             <?php endif;?>
-            <ul class="header__menu-list">
+            <?php if(is_front_page()) :?>
+                <a href="<?php echo get_home_url(); ?>" class="header__logo"><?php
+                    if( !empty( $logo_id ) ) {
+                        echo wp_get_attachment_image( $logo_id, 'full' );
+                    } else {
+                        bloginfo('name');
+                    } ?>
+            <?php endif;?>
+                </a>
+                <div class="header__right-wrap">
+                <div class="header__menu-item header__menu-item_search">
+                    <form action="">
+                        <input type="text" class="header__menu-input">
+                    </form>
+             
+                    <a href="" class="">
+                            <?php echo wp_get_attachment_image(get_field('search_img', 'options') , 'full' )?>
+                    </a>
+                </div>
+                <?php
+                wp_nav_menu( [
+                'theme_location'  => 'HeadMenuRight',
+                'container'       => null,
+                'menu_class'      => 'header__menu-list',
+                ] );
+            ?>
+                </div>
+            
+            <!-- <ul class="header__menu-list">
                 <li class="header__menu-item header__menu-item_search">
                     <form action="">
                         <input type="text" class="header__menu-input">
                     </form>
              
-                    <a href="#" class="">
-                        
-                            <img src="@img/header/search_light.svg" alt="logo">
-                            
-                            <!-- <img src="@img/header/search.svg" alt="logo"> -->
+                    <a href="" class="">
+                            <?php echo wp_get_attachment_image(get_field('search_img', 'options') , 'full' )?>
+                            <img src="@img/header/search.svg" alt="logo"> 
                     </a>
                 </li>
                 <li class="header__menu-item">
@@ -148,7 +174,7 @@
                 <li class="header__menu-item">
                     <a href="#" class="header__menu-link">Contact</a>
                 </li>
-            </ul>
+            </ul> -->
         </nav>
     </div>
     </header>

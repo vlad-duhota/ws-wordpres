@@ -1,6 +1,6 @@
 
 // import Swiper bundle with all modules installed
-import Swiper from 'swiper/bundle';
+// import Swiper from 'swiper/bundle';
 
 // smooth scroll
 document.querySelectorAll('a.anchor').forEach(anchor => {
@@ -20,6 +20,7 @@ searchBtn.addEventListener('click', function(e){
   e.preventDefault();
   searchForm.classList.toggle('active');
 })
+
 // team member swiper
 let teamSwiper = new Swiper('.team-member__swiper', {
     autoHeight: true,

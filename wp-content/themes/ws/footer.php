@@ -1,112 +1,97 @@
     </main>
-
-    <?php
-    $loc_cat_args = [
-        'taxonomy'     => 'location-categories',
-        'type'         => 'location',
-        'orderby'      => 'name',
-        'order'        => 'ASC',
-        'hide_empty'   => 1,
-        'exclude'      => '',
-        'include'      => '',
-        'number'       => 0,
-        'pad_counts'   => false,
-    ];
-    $loc_categories = get_categories($loc_cat_args);
-    $query = new WP_Query;
-    $locations = $query->query('post_type=location');
-    ?>
-
-    <footer class="footer_top">
-        <div class="container flex__container">
-            <div class="footer_top_info"><?php
-                $custom_logo_id = get_theme_mod( 'custom_logo' );
-    
-                if(! is_front_page()) { ?>
-                    <a href="<?php echo get_home_url(); ?>" class="custom-logo-link"><?php
-                    if( !empty( $custom_logo_id ) ) {
+    <footer class="footer">
+   <div class="container">
+        <div class="footer-main">
+            <div class="footer-main__col footer-main__col_1">
+                <?php  $custom_logo_id = get_theme_mod( 'custom_logo' );?>
+               <?php if( !empty( $custom_logo_id ) ) {
                         echo wp_get_attachment_image( $custom_logo_id, 'full' );
                     } else {
                         bloginfo('name');
                     } ?>
-                    </a><?php
-                } else { ?>
-                    <a href="#top" class="custom-logo-link"><?php
-                    if( !empty( $custom_logo_id ) ) {
-                        echo wp_get_attachment_image( $custom_logo_id, 'full' );
-                    } else {
-                        bloginfo('name');
-                    } ?>
-                    </a><?php
-                }
-                ?>
-                <div class="excerpt"><?php the_field('ah_footer_excerpt', 'option') ?></div>
-                <a href="#" class="btn">Book now</a>
+                <p class="footer__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet fringilla urna sed lorem. Amet imperdiet nunc varius diam urna elementum.</p>
             </div>
-            <div class="footer_top_states">
-                <?php foreach ( $loc_categories as $item ) :
-                    $cat_id = $item->term_id; ?>
-                    <div class="footer_top_states_item">
-                        <h3 class="state_name"><?php echo $item->name ?></h3>
-                        <ul class="footer_top_loc_list">
-                            <?php
-                            $args = [
-                                'post_type' => 'location',
-                                'tax_query' => [
-                                    [
-                                        'taxonomy' => 'location-categories',
-                                        'field' => 'id',
-                                        'terms' => $cat_id,
-                                    ]
-                                ],
-                            ];
-                            $query = new WP_Query;
-                            $locations = $query->query($args);
-                            foreach( $locations as $loc ) : ?>
-                                <li class="footer_top_loc_list_item">
-                                    <a href="<?php the_permalink( $loc->ID ) ?>" class="loc_link"><?php echo $loc->post_title ?></a>
-                                </li>
-                            <?php endforeach ?>
-                        </ul>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-            <div class="footer_top_contacts">
-                <h3>Contact Us</h3>
-                <?php
-                wp_nav_menu( [
-                    'theme_location'  => 'FootContMenu',
-                    'container'       => null,
-                    'menu_class'      => 'footer_top_contacts_menu',
-                ] );
-                ?>
-            </div>
+            <ul class="footer-main__col footer__list">
+                <li class="footer__item">
+                    <h3 class="footer__item-title">Services</h3>
+                    <ul>
+                        <li><a>Service 1</a></li>
+                        <li><a>Number 2</a></li>
+                        <li><a>Third service</a></li>
+                        <li><a>4th number</a></li>
+                        <li><a>5 number</a></li>
+                        <li><a>Service 6</a></li>
+                    </ul>
+                </li>
+                <li class="footer__item">
+                    <h3 class="footer__item-title">Page</h3>
+                    <ul>
+                        <li><a>Page</a></li>
+                        <li><a>Video</a></li>
+                        <li><a>Services</a></li>
+                        <li><a>Portfolio</a></li>
+                        <li><a>Our team</a></li>
+                        <li><a>Contact us</a></li>
+                    </ul>
+                </li>
+                <li class="footer__item">
+                    <h3 class="footer__item-title">About</h3>
+                    <ul>
+                        <li><a>Portfolio</a></li>
+                        <li><a>Team</a></li>
+                        <li><a>Services</a></li>
+                        <li><a>About us</a></li>
+                    </ul>
+                </li>
+                <li class="footer__item">
+                    <h3 class="footer__item-title">Our Contacts</h3>
+                    <a href="#" class="footer__item-link"><img src="@img/footer/phone.svg">305-306-1920</a>
+                    <a href="#" class="footer__item-link"><img src="@img/footer/location.svg">10199 Cleary Blvd, Suite 10, FL</a>
+                </li>
+            </ul>
         </div>
-    </footer>
-    <footer class="footer_bottom">
-        <div class="container flex__container">
-            <div class="footer_bottom_copy">
-                <p>Copyright &copy; <?php echo date('Y') ?> | <?php echo get_field('ah_footer_copy_text', 'option') ?></p>
-            </div>
-            <div class="footer_bottom_menu">
-                <?php
-                wp_nav_menu( [
-                    'theme_location'  => 'footer_bottom_menu',
-                    'container'       => null,
-                    'menu_class'      => 'footer_bottom_menu_list',
-                ] );
-                ?>
-            </div>
-            <div class="footer_bottom_devs">
-                <p>Designed and maintained by</p><?php
-                $img       = wp_get_attachment_image_src( get_field('ah_footer_devs_logo', 'option'), 'full' );
-                $image_alt = get_post_meta( get_field('ah_footer_devs_logo', 'option'), '_wp_attachment_image_alt', true );
-                if( isset( $img[0] ) && $img[0] ){ ?>
-                <img src="<?php echo $img[0] ?>" alt="<?php echo $image_alt ?>">
-                <?php } ?>
-            </div>
+    </div>
+    <div class="footer-middle">
+             <div class="container">
+     <div>
+                <h3 class="footer__item-title">Follow us</h3>
+                <ul class="footer__socials">
+                    <li class="footer__socials-item">
+                        <a href="#" class="footer__socials-link">
+                            <img src="@img/footer/socials_1.svg" class="footer__socials-img">
+                        </a>
+                    </li>
+                    <li class="footer__socials-item">
+                        <a href="#" class="footer__socials-link">
+                            <img src="@img/footer/socials_2.svg" class="footer__socials-img">
+                        </a>
+                    </li>
+                    <li class="footer__socials-item">
+                        <a href="#" class="footer__socials-link">
+                            <img src="@img/footer/socials_3.svg" class="footer__socials-img">
+                        </a>
+                    </li>
+                    <li class="footer__socials-item">
+                        <a href="#" class="footer__socials-link">
+                            <img src="@img/footer/socials_4.svg" class="footer__socials-img">
+                        </a>
+                    </li>
+                </ul>
+     </div>
+            <a href="#" class="btn-icon">contact us <span><img src="@img/global/btn-icon.svg"></span></a>
         </div>
-    </footer>
+    </div>
+        <div class="footer-bottom">
+            <div class="container">
+            <a href="#" class="footer__copy">Copyright © 2022  |  All Rights Reserved by Alliance.Health Inc.</a>
+            <a href="#" class="footer__ursa">
+                <span>Designed and <br> maintained by</span>
+                    <img src="@img/footer/ursa.svg" class="footer__ursa-img">
+            </a>
+        </div>
+   </div>
+</footer>
+</div>
 
     <?php wp_footer() ?>
 </body>

@@ -3,15 +3,15 @@
 
 //===Theme main front menus===
 register_nav_menus( array(
-    'HeadMenu'           => __( 'Header Menu',             	'ws' ),
-    'FootContMenu'       => __( 'Footer Contact Menu',   	'ws' ),
+    'HeadMenuLeft'           => __( 'Header Menu Left', 'ws' ),
+	'HeadMenuRight'           => __( 'Header Menu Right', 'ws' ),
+    'FootMenu'       => __( 'Footer Menu',   	'ws' ),
 ) );
 
 
 //===ACF options admin menu===
-if( function_exists( 'acf_add_options_sub_page' ) ) {
-	acf_add_options_page( array(
-		'title'  => __('Site options', 'ws'),
-		'parent' => 'themes.php',
-	) );
+if( function_exists('acf_add_options_page') ) {
+    
+    acf_add_options_page();
+    
 }
